@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "dynarag"
-version = "0.0.0"
+version = "0.1.0"
 description = "Python client to the DynaRAG API"
 authors = ["Frederick Mannings <fred.mannings@predixus.com>"]
 readme = "README.md"
