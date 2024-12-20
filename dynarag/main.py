@@ -186,6 +186,3 @@ class DynaRAGClient:
         return self._make_request(
             return_model=List[ListChunks], endpoint="chunks", method="GET"
         )
-
-
-print("Welcome to DynaRAG")
