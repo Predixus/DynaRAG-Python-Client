@@ -33,7 +33,12 @@ Get stats on user chunks:
 
 ```python
 client.get_chunks()
-# {'total_bytes': 90, 'api_requests': 281, 'document_count': 1, 'chunk_count': 5}
+# {
+#     'total_bytes': 90,
+#     'api_requests': 281,
+#     'document_count': 1,
+#     'chunk_count': 5
+# }
 ```
 
 List chunks:
@@ -90,12 +95,26 @@ Delete all chunks, but dry run:
 
 ```python
 client.delete(dryrun = True)
-# {'EmbeddingCount': 5, 'DocumentCount': 1, 'TotalBytes': 90, 'FilePaths': ['./dev.noext']}
+# {
+#     'EmbeddingCount': 5,
+#     'DocumentCount': 1,
+#     'TotalBytes': 90,
+#     'FilePaths': [
+#         './dev.noext'
+#     ]
+# }
 ```
 
 Commit to deleting:
 
 ```python
 client.delete(dryrun = False)
-# {'EmbeddingCount': 5, 'DocumentCount': 1, 'TotalBytes': 90, 'FilePaths': ['./dev.noext']}
+# {
+#     'EmbeddingCount': 5,
+#     'DocumentCount': 1,
+#     'TotalBytes': 90,
+#     'FilePaths': [
+#         './dev.noext'
+#     ]
+# }
 ```
