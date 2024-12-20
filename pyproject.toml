@@ -3,7 +3,13 @@ name = "dynarag"
 version = "0.1.0"
 description = "Python client to the DynaRAG API"
 authors = ["Frederick Mannings <fred.mannings@predixus.com>"]
+maintainers = ["Frederick Mannings <fred.mannings@predixus.com>"]
+homepage = "https://www.dynarag.com"
+repository = "https://github.com/Predixus/DynaRAG-Python-Client"
+documentation = "https://docs.dynarag.com"
+keywords = ["RAG", "LLM"]
 readme = "README.md"
+license = "MIT"
 
 [tool.poetry.dependencies]
 python = "^3.9"
