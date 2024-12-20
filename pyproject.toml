@@ -1,0 +1,50 @@
+[tool.poetry]
+name = "dynarag"
+version = "0.0.0"
+description = "Python client to the DynaRAG API"
+authors = ["Frederick Mannings <fred.mannings@predixus.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.group.dev.dependencies]
+poethepoet = "^0.31.1"
+pytest = "^8.3.4"
+ruff = "^0.8.4"
+mypy = "^1.13.0"
+
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+
+[tool.ruff]
+exclude = ["*_pb2.py", "*.pyi"]
+extend-include = ["*.ipynb"]
+line-length=88
+
+[tool.ruff.lint.isort]
+known-first-party = ["query_tool", "tests" ]
+length-sort = true
+
+[tool.ruff.lint]
+extend-select = [
+        "F401", # unused imports 
+        "F841"  # unused variables
+    ]
+select=["I"]
+
+[tool.poe.tasks]
+_lint_check = "ruff check dynarag tests"
+_lint_fix = "ruff check dynarag tests --fix "
+_type = "mypy dynarag --strict --warn-unused-ignores --warn-redundant-casts "
+_format = "ruff format dynarag tests"
+
+format = ["_format", "_lint_fix"]
+lint = ["_format", "_lint_fix", "_type"]
+lint_ci = ["_lint_check", "_type"]
+
+# Testing
+test = "pytest tests -vv --disable-warnings"
+
