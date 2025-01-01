@@ -5,11 +5,20 @@ import urllib.error
 import urllib.request
 from typing import Any, Dict, List, TypeVar, Optional, TypedDict, cast
 
-from dynarag.exceptions import BadAPIRequest, MissingAPIToken, BadEnvironment
+from dynarag.exceptions import BadAPIRequest, BadEnvironment, MissingAPIToken
 
 LOGGER = logging.getLogger(__name__)
 
+try:
+    from dotenv import load_dotenv
+
+    load_dotenv()
+    LOGGER.info("Environment variables loaded from .env file if it exists")
+except ImportError:
+    LOGGER.debug("python-dotenv not installed, skipping .env loading")
+
 T = TypeVar("T")
+
 
 class Similar(TypedDict):
     ID: int
@@ -51,9 +60,7 @@ class DynaRAGClient:
         api_token = os.environ.get("DYNARAG_API_TOKEN", None)
         base_url = os.environ.get("DYNARAG_BASE_URL", None)
         if not api_token:
-            error_str = (
-                "Could not find the `DYNARAG_API_TOKEN` environment variable. "
-            )
+            error_str = "Could not find the `DYNARAG_API_TOKEN` environment variable. "
             LOGGER.error(error_str)
             raise MissingAPIToken(error_str)
         if not base_url:
@@ -66,7 +73,9 @@ class DynaRAGClient:
             LOGGER.error(error_str)
             raise BadEnvironment(error_str)
 
-        LOGGER.info("Obtained DynaRAG API key and service URL. Successfully initialised.")
+        LOGGER.info(
+            "Obtained DynaRAG API key and service URL. Successfully initialised."
+        )
 
         self.base_url = base_url
         self.api_token = api_token
