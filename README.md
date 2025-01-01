@@ -1,15 +1,23 @@
 # DynaRAG
 
-This is the Python client to the [DynaRAG API](https://www.dynarag.com).
+This is the Python client to [DynaRAG](https://github.com/Predixus/DynaRAG).
 
-DynaRAG provides a simple and fast interface to implement RAG (Retrieval Augemented Generation) into your application.
+DynaRAG provides a simple and fast interface to implement RAG (Retrieval Augemented Generation)
+into your application.
 
 ## Configuration
 
-DynaRAG only requires an API token to get started. You can obtain an API token by going to the [DynaRAG App](https://app.dynarag.com),
+DynaRAG requires some environment variables to get started:
+- `DYNARAG_API_TOKEN` - a signed JWT that contains data needed by DynaRAG. Follow the spec in the [DynaRAG](https://github.com/Predixus/DynaRAG)
+service repo.
+- `DYNARAG_BASE_URL` - url to the DynaRAG service. e.g. http://localhost:7890
+
+You can obtain an API token by going to the [DynaRAG App](https://app.dynarag.com),
 logging in and navigating to dashboard>developer. From here you can generate an API token.
 
-> :warning: **API Token**: Put your API token into an environment varibale called `DYNARAG_API_TOKEN` in order for the DynaRAG Client to discover it.
+> :warning: **API Token**: Put your API token into an environment variable called `DYNARAG_API_TOKEN`
+> in order for the DynaRAG Client to discover it. This must be a JWT that follows the spec of the
+> [DynaRAG service](https://github.com/Predixus/DynaRAG).
 
 ## Usage
 

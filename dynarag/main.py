@@ -5,13 +5,11 @@ import urllib.error
 import urllib.request
 from typing import Any, Dict, List, TypeVar, Optional, TypedDict, cast
 
-from dynarag.constants import DYNARAG_BASE_URL
-from dynarag.exceptions import BadAPIRequest, MissingAPIToken
+from dynarag.exceptions import BadAPIRequest, MissingAPIToken, BadEnvironment
 
 LOGGER = logging.getLogger(__name__)
 
 T = TypeVar("T")
-
 
 class Similar(TypedDict):
     ID: int
@@ -51,17 +49,26 @@ class DynaRAGClient:
     def __init__(self) -> None:
         """Initialise the DynaRAG client."""
         api_token = os.environ.get("DYNARAG_API_TOKEN", None)
+        base_url = os.environ.get("DYNARAG_BASE_URL", None)
         if not api_token:
             error_str = (
-                "Could not find the `DYNARAG_API_TOKEN` environment variable."
-                "You can obtain one by going to https://app.dynarag.com/dashboard/developer and generate a token."
+                "Could not find the `DYNARAG_API_TOKEN` environment variable. "
             )
             LOGGER.error(error_str)
             raise MissingAPIToken(error_str)
+        if not base_url:
+            error_str = (
+                "Could not find the `DYNARAG_BASE_URL` environment variable. "
+                "Set it to the URL of your DynaRAG service, e.g. http://localhost:7890. "
+                "Follow the instructions in the DynaRAG service repo to get started: "
+                "https://github.com/predixus/dynarag?tab=readme-ov-file#getting-started"
+            )
+            LOGGER.error(error_str)
+            raise BadEnvironment(error_str)
 
-        LOGGER.info("Obtained DynaRAG API key. Successfully initialised.")
+        LOGGER.info("Obtained DynaRAG API key and service URL. Successfully initialised.")
 
-        self.base_url = DYNARAG_BASE_URL
+        self.base_url = base_url
         self.api_token = api_token
 
     def _make_request(

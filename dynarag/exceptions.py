@@ -8,3 +8,7 @@ class MissingAPIToken(BaseException):
 
 class BadAPIRequest(BaseException):
     """Raised if a request to the DynaRAG API fails"""
+
+
+class BadEnvironment(BaseException):
+    """Raised when the environment is bad"""
